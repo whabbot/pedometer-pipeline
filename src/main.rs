@@ -1,7 +1,4 @@
-mod filter;
-mod parser;
-mod processor;
-mod utils;
+use rusty_pedometer::filter_data;
 
 fn main() {
     // Load data from file passed in as argument
@@ -13,9 +10,6 @@ fn main() {
     let filename = &args[1];
     let data = std::fs::read_to_string(filename).expect("Unable to read file");
 
-    let parsed = parser::Parser::run(&data);
-    parsed.display();
-
-    let processor = processor::Processor::run(parsed.parsed_data.unwrap());
-    processor.display();
+    let filtered_data = filter_data(data);
+    println!("Filtered data: {:#?}", filtered_data);
 }

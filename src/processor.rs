@@ -1,9 +1,9 @@
-use crate::filter::Filter;
+use crate::filter;
 
 pub struct Processor {
     data: Vec<Vec<Vec<f64>>>,
     dot_product_data: Option<Vec<f64>>,
-    filtered_data: Option<Vec<f64>>,
+    pub filtered_data: Option<Vec<f64>>,
 }
 impl Processor {
     pub fn new(data: Vec<Vec<Vec<f64>>>) -> Self {
@@ -40,7 +40,7 @@ impl Processor {
     }
 
     fn filtered_data(&mut self) {
-        let filter = Filter;
+        let filter = filter::Filter;
         let low_frequency_filtered =
             filter.filter_low_5_hz(&self.dot_product_data.as_ref().unwrap());
         let high_frequency_filtered = filter.filter_high_1_hz(&low_frequency_filtered);

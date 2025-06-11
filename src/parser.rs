@@ -1,6 +1,5 @@
-use crate::filter::Filter;
+use crate::filter;
 use crate::utils;
-use core::panic;
 
 pub struct Parser {
     pub parsed_data: Option<Vec<Vec<Vec<f64>>>>,
@@ -60,7 +59,7 @@ impl Parser {
             let split_components = components
                 .into_iter()
                 .map(|total_acceleration| {
-                    let filter = Filter;
+                    let filter = filter::Filter;
                     let gravity_acceleration = filter.filter_low_0_hz(&total_acceleration);
                     let user_acceleration = total_acceleration
                         .iter()
